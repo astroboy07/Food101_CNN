@@ -1,7 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 import pandas as pd
-
+import matplotlib.pyplot as plt
 
 # class names of 101 foods
 class_names = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 
@@ -29,60 +29,80 @@ class_names = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef
 st.set_page_config(page_title="Food Recognition",
                     page_icon="🍕")
 
+tab1, tab2, tab3 = st.tabs(["🔍 Food Recognition", "🛠 Details", "🎓 About me!"])
 
+# in tab 1
 # defining necessary functions
 
-def load_prep(image, img_shape=224, scale=True):
-    img = tf.io.decode_image(image, channels=3)
-    img = tf.image.resize(img, size=([img_shape, img_shape]))
-    if scale:
-        return img/255.
-    return img
+with tab1: 
+    def load_prep(image, img_shape=224, scale=True):
+        img = tf.io.decode_image(image, channels=3)
+        img = tf.image.resize(img, size=([img_shape, img_shape]))
+        if scale:
+            return img/255.
+        return img
 
-@st.cache(suppress_st_warning=True)
-def predicting(img, model):
-    img = load_prep(img, scale=False)
-    img = tf.cast(tf.expand_dims(img, axis=0), tf.int16)
-    pred_prob_image = model.predict(img)
-    pred_class_image = class_names[pred_prob_image.argmax()]
-    top_3_pred_prob_idx = (pred_prob_image.argsort())[0][-3:][::-1]
-    top_3_pred_prob = [pred_prob_image[0][idx1] for idx1 in top_3_pred_prob_idx]
-    top_3_pred_class = [class_names[idx2] for idx2 in top_3_pred_prob_idx]
-    df = pd.DataFrame({"Top 3 predictions": top_3_pred_class,
-                    "F1 scores": top_3_pred_prob})
-    return pred_class_image, pred_prob_image, df
+    @st.cache(suppress_st_warning=True)
+    def predicting(img, model):
+        img = load_prep(img, scale=False)
+        img = tf.cast(tf.expand_dims(img, axis=0), tf.int16)
+        pred_prob_image = model.predict(img)
+        pred_class_image = class_names[pred_prob_image.argmax()]
+        top_3_pred_prob_idx = (pred_prob_image.argsort())[0][-3:][::-1]
+        top_3_pred_prob = [pred_prob_image[0][idx1] for idx1 in top_3_pred_prob_idx]
+        top_3_pred_class = [class_names[idx2] for idx2 in top_3_pred_prob_idx]
+        df = pd.DataFrame({"Top 3 predictions": top_3_pred_class,
+                        "F1 scores": top_3_pred_prob})
+        return pred_class_image, pred_prob_image, top_3_pred_class, top_3_pred_prob
 
-
-
-# Main body
-st.title("Food Recognition 🍕🔍")
-st.header("Recognize food images! 🕵🏻‍♂️")
-
-
-## upload food image
-image_file = st.file_uploader(label="Choose a file",
-                        type=['png', 'jpg'])
+    # Main body
+    st.title("Food Recognition 🍕🔍")
+    st.header("Recognize food images! 🕵🏻‍♂️")
 
 
-dirpath = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Extras/fine_tuned"
-model = tf.keras.models.load_model(dirpath)
+
+    ## upload food image
+    image_file = st.file_uploader(label="Choose a file",
+                            type=['png', 'jpg'])
 
 
-if not image_file:
-    st.warning("Please upload an image")
-    st.stop()
+    dirpath = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Extras/fine_tuned"
+    model = tf.keras.models.load_model(dirpath)
 
-else:
-    image = image_file.read()
-    st.image(image, use_column_width=True)
-    go = st.button("Go!", help="Press the button to recognize food.")
 
-if go:
-    pred_class_image, pred_prob_image, df = predicting(image, model)
-    st.success(f"Predicted food: {pred_class_image} | Prediction percentage = {pred_prob_image.max() * 100:.1f}", icon="✅")
-    
-    # st.write(alt.Chart(df).mark_bar().encode(
-    #     x='F1 Scores',
-    #     y=alt.X('Top 3 Predictions', sort=None),
-    #     text='F1 Scores'
-    # ).properties(width=600, height=400))
+    if not image_file:
+        st.warning("Please upload an image")
+        st.stop()
+
+    else:
+        image = image_file.read()
+        st.image(image, use_column_width=True)
+        go = st.button("Go!", help="Press the button to recognize food.")
+
+    if go:
+        pred_class_image, pred_prob_image, top_3_class, top_3_prob = predicting(image, model)
+        st.success(f"Predicted food: {pred_class_image} | Prediction percentage = {pred_prob_image.max() * 100:.1f}%", icon="✅")
+        fig, ax = plt.subplots()
+        top_3_prob = [top_3_prob[i] * 100 for i in range(len(top_3_prob))] 
+        ax.bar(top_3_class, top_3_prob)
+        ax.set_title("Top 3 predictions")
+        st.pyplot(fig)
+
+with tab2:
+    st.write("""
+    An end-to-end machine learning model for recognizing food in your image. This model is trained on 
+    [101 classes of food images](https://www.tensorflow.org/datasets/catalog/food101). It can detect food 
+    items such as chicken curry, cheesecake, ramen, samosa, chocolate cake and many more! 
+
+    The model is based fine-tuning of **EfficientNetB1** which was initially pre-trained on ImageNet. The overall 
+    accuracy of the model is **80%**.
+
+    For more details, please visit [**GitHub**](https://github.com/astroboy07/Food101_CNN).
+    """)
+
+with tab3:
+    st.write("""
+    I am a Ph.D. candidate in Department of Physics at University of Texas at Dallas. My research focuses on gravitational 
+    lensing, gravitational waves (GWs), and black holes (BHs). In particular, I am working on the detectability of gravitational 
+    lensing of GWs and quantify the precession signature on GWs emitted by BH system.
+    """)
