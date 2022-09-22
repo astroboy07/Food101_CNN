@@ -2,3 +2,4 @@ Utils/utility.py
 Utils/app_cp.py
 Utils/tensorflow_try.py
 Utils/utils.py
+.gitignore
