@@ -45,7 +45,6 @@ with tab1:
     def predicting(img, model):
         img = load_prep(img, scale=False)
         img = tf.cast(tf.expand_dims(img, axis=0), tf.int16)
-        print(model.summary())
         pred_prob_image = model.predict(img)
         pred_class_image = class_names[pred_prob_image.argmax()]
         top_3_pred_prob_idx = (pred_prob_image.argsort())[0][-3:][::-1]
@@ -65,7 +64,6 @@ with tab1:
 
     # get the model
     dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
-    # dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
     model = tf.keras.models.load_model(dirpath_saved_model)
 
     # dirpath = "./Extras/fine_tuned"
