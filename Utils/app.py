@@ -51,6 +51,7 @@ with tab1:
         top_3_pred_prob_idx = (pred_prob_image.argsort())[0][-3:][::-1]
         top_3_pred_prob = [pred_prob_image[0][idx1] for idx1 in top_3_pred_prob_idx]
         top_3_pred_class = [class_names[idx2] for idx2 in top_3_pred_prob_idx]
+        print(pred_class_image, pred_prob_image, top_3_pred_class, top_3_pred_prob)
         return pred_class_image, pred_prob_image, top_3_pred_class, top_3_pred_prob
 
     # Main body
@@ -65,6 +66,7 @@ with tab1:
 
     # get the model
     dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
+    # dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
     model = tf.keras.models.load_model(dirpath_saved_model)
 
     # dirpath = "./Extras/fine_tuned"
