@@ -40,7 +40,7 @@ We evaluate the model using various metrics on the "unseen" test data. For more 
 
 ## Deployment
 
-Finally, we deployed the model using the Streamlit. The python script used can be found [here](https://github.com/astroboy07/Food101_CNN/blob/main/Utils/app.py). This part is directly inspired by **Daniel Bourke's** [CS329s Lecture](https://www.mrdbourke.com/cs329s-machine-learning-deployment-tutorial/). To run the app, check the dependencies in the [requirements.txt](https://github.com/astroboy07/Food101_CNN/blob/main/requirements.txt), clone the repo, and run the script [app.py](https://github.com/astroboy07/Food101_CNN/blob/main/Utils/app.py) using command `streamlit run app.py`.
+Finally, we deploy the model using the Streamlit. The python script used can be found [here](https://github.com/astroboy07/Food101_CNN/blob/main/Utils/app.py). This part is directly inspired by **Daniel Bourke's** [CS329s Lecture](https://www.mrdbourke.com/cs329s-machine-learning-deployment-tutorial/). To run the app, check the dependencies in the [requirements.txt](https://github.com/astroboy07/Food101_CNN/blob/main/requirements.txt), clone the repo, and run the script [app.py](https://github.com/astroboy07/Food101_CNN/blob/main/Utils/app.py) using command `streamlit run app.py`.
 
 
 
