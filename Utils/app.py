@@ -63,11 +63,11 @@ with tab1:
                             type=['png', 'jpg'])
 
     # get the model
-    dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
-    model = tf.keras.models.load_model(dirpath_saved_model)
+    # dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
+    # model = tf.keras.models.load_model(dirpath_saved_model)
 
-    # dirpath = "./Extras/fine_tuned"
-    # model = tf.keras.models.load_model(dirpath)
+    dirpath = "./Extras/fine_tuned"
+    model = tf.keras.models.load_model(dirpath)
 
 
     if not image_file:
