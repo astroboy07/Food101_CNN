@@ -28,7 +28,7 @@ The dataset used for training the model is obtained from [`tfds.image_classifica
 
 ### Training
 
-We optimized the data input pipeline and used mixed precision training to achieve peak performance by using compatible GPU. Firstly, we employed varoious techniques such as prefetch transformation, parallelization of map transformation etc. ([more details](https://www.tensorflow.org/guide/data_performance#best_practice_summary)) to achieve efficient input data pipeline. Secondly, we used [`mixed precision`](https://www.tensorflow.org/guide/mixed_precision) the uses both 16-bit and 32-bit floating-point types in a model during training to make it run faster and use less memory. This framework of training increased the computation speed by 3x.
+We optimized the data input pipeline and used mixed precision training to achieve peak performance by using compatible GPU. Firstly, we employed varoious techniques such as prefetch transformation, parallelization of map transformation etc. ([more details](https://www.tensorflow.org/guide/data_performance#best_practice_summary)) to achieve efficient input data pipeline. Secondly, we used [`mixed precision`](https://www.tensorflow.org/guide/mixed_precision) that uses both 16-bit and 32-bit floating-point types in a model during training to make it run faster and use less memory. This framework of training increased the computation speed by 3x.
 
 ### Model
 
