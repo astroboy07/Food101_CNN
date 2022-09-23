@@ -32,7 +32,7 @@ We optimized the data input pipeline and used mixed precision training to achiev
 
 ### Model
 
-We start off by building a feature extraction model with a base model and customized input and output layer satisfying our needs. The base model is [`EfficientNetB1`](https://www.tensorflow.org/api_docs/python/tf/keras/applications/efficientnet/EfficientNetB1) which has been originally trained on ImageNet dataset. We use the power of transfer learning and fine-tuning to achieve accuracy of **80%**. We also got the bonus point because our model training was over in a couple of minutes compared to the mentioned **2-3** days time in the paper.
+We start off by building a feature extraction model with a base model and customized input and output layer satisfying our needs. The base model is [`EfficientNetB1`](https://www.tensorflow.org/api_docs/python/tf/keras/applications/efficientnet/EfficientNetB1) which has been originally trained on ImageNet dataset. We use the power of transfer learning and fine-tuning to achieve accuracy of **80%**. We also receive the bonus point because our model training was over in a couple of minutes compared to the mentioned **2-3** days time in the paper.
 
 ## Evaluation
 
