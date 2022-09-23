@@ -18,7 +18,7 @@ The is basically an image classification model built using TensorFlow/Keras and 
 
 ## Goal
 
-The aim of this project is to beat the accuracy of **77.4%** achieved by the [paper](https://arxiv.org/abs/1606.05675) where they trained the model for **2-3 days**. Bonus point will be given if we can reduce the training time significantly.
+The aim of this project is to beat the accuracy of **77.4%** achieved by the [paper](https://arxiv.org/abs/1606.05675) where they trained the model for **2-3 days**. Bonus point if we can reduce the training time significantly.
 
 ## How?
 
