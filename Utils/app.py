@@ -62,9 +62,12 @@ with tab1:
     image_file = st.file_uploader(label="Choose a file",
                             type=['png', 'jpg'])
 
+    # get the model
+    dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
+    model = tf.keras.models.load_model(dirpath_saved_model)
 
-    dirpath = "./Extras/fine_tuned"
-    model = tf.keras.models.load_model(dirpath)
+    # dirpath = "./Extras/fine_tuned"
+    # model = tf.keras.models.load_model(dirpath)
 
 
     if not image_file:
