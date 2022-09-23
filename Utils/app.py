@@ -63,7 +63,7 @@ with tab1:
                             type=['png', 'jpg'])
 
 
-    dirpath = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Extras/fine_tuned"
+    dirpath = "./Extras/fine_tuned"
     model = tf.keras.models.load_model(dirpath)
 
 
