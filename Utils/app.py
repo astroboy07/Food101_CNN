@@ -64,8 +64,8 @@ with tab1:
                             type=['png', 'jpg'])
 
     # get the model
-    # dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
-    dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
+    dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
+    # dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
     model = tf.keras.models.load_model(dirpath_saved_model)
 
     # dirpath = "./Extras/fine_tuned"
