@@ -1,6 +1,5 @@
 import streamlit as st
 import tensorflow as tf
-import pandas as pd
 import matplotlib.pyplot as plt
 
 # class names of 101 foods
@@ -51,8 +50,6 @@ with tab1:
         top_3_pred_prob_idx = (pred_prob_image.argsort())[0][-3:][::-1]
         top_3_pred_prob = [pred_prob_image[0][idx1] for idx1 in top_3_pred_prob_idx]
         top_3_pred_class = [class_names[idx2] for idx2 in top_3_pred_prob_idx]
-        df = pd.DataFrame({"Top 3 predictions": top_3_pred_class,
-                        "F1 scores": top_3_pred_prob})
         return pred_class_image, pred_prob_image, top_3_pred_class, top_3_pred_prob
 
     # Main body
