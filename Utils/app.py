@@ -44,14 +44,13 @@ with tab1:
     @st.cache(suppress_st_warning=True)
     def predicting(img, model):
         img = load_prep(img, scale=False)
-        img = tf.expand_dims(img, axis=0)
-        # img = tf.cast(tf.expand_dims(img, axis=0), tf.int16)
+        img = tf.cast(tf.expand_dims(img, axis=0), tf.int16)
         pred_prob_image = model.predict(img)
         pred_class_image = class_names[pred_prob_image.argmax()]
         top_3_pred_prob_idx = (pred_prob_image.argsort())[0][-3:][::-1]
         top_3_pred_prob = [pred_prob_image[0][idx1] for idx1 in top_3_pred_prob_idx]
         top_3_pred_class = [class_names[idx2] for idx2 in top_3_pred_prob_idx]
-        print(pred_class_image, pred_prob_image, top_3_pred_class, top_3_pred_prob)
+        print(pred_class_image, pred_prob_image.max(), type(top_3_pred_class), type(top_3_pred_prob))
         return pred_class_image, pred_prob_image, top_3_pred_class, top_3_pred_prob
 
     # Main body
@@ -65,8 +64,8 @@ with tab1:
                             type=['png', 'jpg'])
 
     # get the model
-    dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
-    # dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
+    # dirpath_saved_model = "./Saved_model/fine_tuned.hdf5"
+    dirpath_saved_model = "/Users/saifali/Downloads/Machine_Learning_Projects/Food101_TransferLearning/Saved_model/fine_tuned.hdf5"
     model = tf.keras.models.load_model(dirpath_saved_model)
 
     # dirpath = "./Extras/fine_tuned"
